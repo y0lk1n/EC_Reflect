@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+
     @ObservedObject var reflectionVM = ReflectionViewModel()
     @ObservedObject var profileVM = ProfileViewModel()
+    @ObservedObject var quoteVM = QuoteViewModel()
     
     var body: some View {
         
         if profileVM.isAuthenticated {
             
             TabView {
-                          
-                StartScreen(reflectionVM: reflectionVM, profileVM: profileVM)
+                
+                StartScreen(reflectionVM: reflectionVM, profileVM: profileVM, quoteVM: quoteVM)
                     .tabItem {
                         Label("Today", systemImage: "doc.text.image")
+                           
                         
                     }
                 
@@ -30,14 +33,15 @@ struct ContentView: View {
                 
                 ProfileView(profileVM: profileVM)
                     .tabItem {
-                        Label("Profile", systemImage: "person")
+                        Label("Settings", systemImage: "gear")
                         
                     }
             }
+        
         } else {
             WelcomeView(profileVM: profileVM)
         }
-        
+            
     }
     
     
